@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Makrab</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Form Registrasi Makrab</h2>
+    <form id="form">
+        <label>Nama Lengkap:</label>
+        <input type="text" name="nama" required>
+
+        <label>Angkatan:</label>
+        <input type="number" name="angkatan" required>
+
+        <button type="submit">Kirim</button>
+    </form>
+
+    <p id="status" style="margin-top:15px; font-weight:bold;"></p>
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwXW122ujS4awKU4pMCGjKugrZJpm3nIl8lS7H9b4gUQay1kLx5A0iSB8e-Gz64l6pqsQ/exec";
+
+    fetch(scriptURL, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => {
+        document.getElementById("status").innerText = "Registrasi berhasil!";
+        e.target.reset();
+    })
+    .catch(error => {
+        document.getElementById("status").innerText = "Terjadi error. Coba lagi.";
+    });
+});
+</script>
+
+</body>
+</html>
